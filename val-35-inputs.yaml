@@ -1,0 +1,77 @@
+
+tf_state_bucket_name: csl-dr-tf-state
+tf_state_path: DR/csl/val35/terraform.tfstate
+
+tags: {
+  "Application": "CDR-SCE",
+  "Environment": "VAL-DR",
+  "Customer": "CSL Behring",
+  "ProjectCode": "CSL-SCE-35-VAL-DR",
+}
+
+aws_region: "eu-central-1"
+vpc_id: vpc-035aa251e3ea81e32 # VPC-CSL-VAL-DR
+vpc_cidr_block: "10.0.0.0/16"
+default_sg_id: "sg-0130b3869c8323b11"
+
+servers:
+  ad:
+    name: AD-VAL-CSL-SCE-3.x-2022-DR
+    ami_id: ami-0e6b331f8424a858c
+    key_pair: csl-sshkey-prodtest
+    instance_type: t3.2xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.5.43"
+    subnet_id: subnet-0dfed82a7b9e96d0e # Core-Subnet-1b
+    instance_profile: "Custom-ec2-role"
+  cdr:
+    name: CDR-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-0fefdce1745a0c7d5
+    key_pair: csl-sshkey-prodtest
+    instance_type: m4.4xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.50"
+    public_ip: "18.185.164.206"
+    subnet_id: subnet-09a2127436fac227e # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sftp:
+    name: SFTP-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-077fd2542dda2beff 
+    key_pair: csl-sshkey-prodtest
+    instance_type: m4.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.18"
+    public_ip: "18.197.66.31"
+    subnet_id: subnet-09a2127436fac227e # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sas:
+    name: SAS-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-08b1de820223a8349
+    key_pair: csl-sshkey-prodtest
+    instance_type: i3en.xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.10.52"
+    public_ip: "35.157.196.97"
+    subnet_id: subnet-0f5c40c5585318b00 # Public-Subnet-1b
+    instance_profile: "Custom-ec2-role"
+  rdg:
+    name: RDG-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-07f9bbcba165260ae
+    key_pair: csl-sshkey-prodtest
+    instance_type: m5.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.158"
+    public_ip: "3.120.166.156"
+    subnet_id: subnet-09a2127436fac227e # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sgw:
+    name: ARC-SGW-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-00a3468cebd53eedf
+    key_pair: csl-sshkey-prodtest
+    instance_type: m4.xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.1.91"
+    subnet_id: subnet-02f97987d8f8d6a34 # Private-Subnet-a
+    instance_profile: "ARC-CSL-production-prodtest-SGW-instance-role"
+  
+

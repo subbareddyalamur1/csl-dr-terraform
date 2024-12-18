@@ -1,0 +1,64 @@
+
+tf_state_bucket_name: csl-dr-tf-state
+tf_state_path: DR/csl/val42/terraform.tfstate
+
+tags: {
+  "Application": "CDR-SCE",
+  "Environment": "VAL-DR",
+  "Customer": "CSL Behring",
+  "ProjectCode": "CSL-SCE-42-VAL-DR",
+}
+
+aws_region: "eu-central-1"
+vpc_id: vpc-02fead8021136e604 # VPC-CSL-PROD-DR
+vpc_cidr_block: "10.0.0.0/16"
+default_sg_id: "sg-0130b3869c8323b11"
+
+servers:
+  cdr:
+    name: CDR-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-03ba1674b6f2be948 
+    key_pair: csl-sshkey-prodtest
+    instance_type: m4.4xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.50"
+    subnet_id: subnet-09a2127436fac227e # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sftp:
+    name: SFTP-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-0360e01e53dff5df7 
+    key_pair: csl-sshkey-prodtest
+    instance_type: m4.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.18"
+    subnet_id: subnet-09a2127436fac227e # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sas:
+    name: SAS-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-03af32dd15f101cd6 
+    key_pair: csl-sshkey-prodtest
+    instance_type: i3en.xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.10.52"
+    subnet_id: subnet-0f5c40c5585318b00 # Public-Subnet-1b
+    instance_profile: "Custom-ec2-role"
+  rdg:
+    name: RDG-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-09e490233ba2521d5 
+    key_pair: csl-sshkey-prodtest
+    instance_type: m5.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.158"
+    subnet_id: subnet-09a2127436fac227e # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sgw:
+    name: ARC-SGW-VAL-CSL-SCE-3.x-DR
+    ami_id: ami-08de081503653cf94
+    key_pair: csl-sshkey-prodtest
+    instance_type: m4.xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.1.91"
+    subnet_id: subnet-02f97987d8f8d6a34 # Private-Subnet-a
+    instance_profile: "ARC-CSL-production-prodtest-SGW-instance-role"
+  
+
