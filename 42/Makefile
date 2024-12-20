@@ -22,11 +22,11 @@ setup: check_args
 	@# Create backend.tf file
 	@echo "terraform {" > backend.tf
 	@echo "  backend \"s3\" {" >> backend.tf
-	@echo "    bucket = \"$(shell grep tf_state_bucket_name $(ENV)-$(VERSION)-inputs.yaml | cut -d':' -f2 | tr -d ' ')\"" >> backend.tf
-	@echo "    key    = \"$(shell grep tf_state_path $(ENV)-$(VERSION)-inputs.yaml | cut -d':' -f2 | tr -d ' ')\"" >> backend.tf
-	@echo "    region = \"$(shell grep aws_region $(ENV)-$(VERSION)-inputs.yaml | cut -d':' -f2 | tr -d ' ')\"" >> backend.tf
+	@echo "    bucket = \"$(shell grep tf_state_bucket_name inputs.yaml | cut -d':' -f2 | tr -d ' ')\"" >> backend.tf
+	@echo "    key    = \"$(shell grep tf_state_path inputs.yaml | cut -d':' -f2 | tr -d ' ')\"" >> backend.tf
+	@echo "    region = \"$(shell grep aws_region inputs.yaml | cut -d':' -f2 | tr -d ' ')\"" >> backend.tf
 	@echo "  }" >> backend.tf
-	@echo "}" >> $(VERSION)/backend.tf
+	@echo "}" >> backend.tf
 
 # Initialize Terraform
 init: setup

@@ -4,9 +4,9 @@ locals {
 
 # CDR Security Group
 module "cdr_sg" {
-  source = "../42/modules/security_group"
+  source = "./modules/security_group"
 
-  name        = "cdr-sg"
+  name        = "${local.inputs.servers.cdr.name}-sg"
   description = "Security group for CDR server"
   vpc_id      = local.inputs.vpc_id
 
@@ -34,9 +34,9 @@ module "cdr_sg" {
 
 # SFTP Security Group
 module "sftp_sg" {
-  source = "../42/modules/security_group"
+  source = "./modules/security_group"
 
-  name        = "sftp-sg"
+  name        = "${local.inputs.servers.sftp.name}-sg"
   description = "Security group for SFTP server"
   vpc_id      = local.inputs.vpc_id
 
@@ -64,9 +64,9 @@ module "sftp_sg" {
 
 # SAS Security Group
 module "sas_sg" {
-  source = "../42/modules/security_group"
+  source = "./modules/security_group"
 
-  name        = "sas-sg"
+  name        = "${local.inputs.servers.sas.name}-sg"
   description = "Security group for SAS server"
   vpc_id      = local.inputs.vpc_id
 
@@ -94,9 +94,9 @@ module "sas_sg" {
 
 # GUAC Security Group
 module "guac_sg" {
-  source = "../42/modules/security_group"
+  source = "./modules/security_group"
 
-  name        = "guac-sg"
+  name        = "${local.inputs.servers.guac.name}-sg"
   description = "Security group for GUAC server"
   vpc_id      = local.inputs.vpc_id
 
@@ -124,9 +124,9 @@ module "guac_sg" {
 
 # SAS ALB Security Group
 module "sas_alb_sg" {
-  source = "../42/modules/security_group"
+  source = "./modules/security_group"
 
-  name        = "sas-alb-sg"
+  name        = "${local.inputs.servers.sas.name}-alb-sg"
   description = "Security group for SAS ALB"
   vpc_id      = local.inputs.vpc_id
 
@@ -154,9 +154,9 @@ module "sas_alb_sg" {
 
 # GUAC ALB Security Group
 module "guac_alb_sg" {
-  source = "../42/modules/security_group"
+  source = "./modules/security_group"
 
-  name        = "guac-alb-sg"
+  name        = "${local.inputs.servers.guac.name}-alb-sg"
   description = "Security group for GUAC ALB"
   vpc_id      = local.inputs.vpc_id
 
@@ -165,6 +165,13 @@ module "guac_alb_sg" {
       description = "HTTPS from anywhere"
       from_port   = 443
       to_port     = 443
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      description = "HTTP from anywhere"
+      from_port   = 80
+      to_port     = 80
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
