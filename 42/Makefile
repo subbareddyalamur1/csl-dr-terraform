@@ -19,6 +19,7 @@ setup: check_args
 	fi
 	@# Copy inputs file to terraform version directory
 	@cp ../$(ENV)-$(VERSION)-inputs.yaml ./inputs.yaml
+	@sleep 5
 	@# Create backend.tf file
 	@echo "terraform {" > backend.tf
 	@echo "  backend \"s3\" {" >> backend.tf
