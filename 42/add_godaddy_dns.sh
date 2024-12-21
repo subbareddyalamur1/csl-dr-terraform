@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # GoDaddy API Configuration
-API_KEY="A4vUC1vkQ8Q_DY7Y5fq42mqASnT3qHhDfL"
-API_SECRET="DY7nUFrRSnKFZYAC3JvLxe"
+API_KEY="xxx"
+API_SECRET="xxx"
 DOMAIN="sycamoreinformatics.de"
 
 # Load Balancer DNS names from Terraform output
