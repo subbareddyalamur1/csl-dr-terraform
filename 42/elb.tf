@@ -1,44 +1,3 @@
-# CDR Network Load Balancer
-module "cdr_nlb" {
-  source = "./modules/nlb"
-
-  name               = "${local.inputs.servers.cdr.name}-nlb"
-  internal           = false
-  subnets           = local.inputs.servers.cdr.elb_subnets
-  vpc_id            = local.inputs.vpc_id
-
-  enable_cross_zone_load_balancing = true
-  enable_access_logs              = false
-
-  target_groups = [
-    {
-      name        = "${local.inputs.servers.cdr.name}-tg"
-      port        = 443
-      protocol    = "TCP"
-      target_type = "instance"
-      health_check = {
-        enabled             = true
-        protocol            = "TCP"
-        healthy_threshold   = 3
-        unhealthy_threshold = 3
-        interval            = 30
-      }
-    }
-  ]
-
-  listeners = [
-    {
-      port     = 443
-      protocol = "TCP"
-      default_action = {
-        type             = "forward"
-        target_group_key = 0
-      }
-    }
-  ]
-
-  tags = local.inputs.tags
-}
 
 # SFTP Network Load Balancer
 module "sftp_nlb" {
@@ -82,6 +41,60 @@ module "sftp_nlb" {
   tags = local.inputs.tags
 }
 
+# Application Load Balancer for CDR
+module "cdr_alb" {
+  source = "./modules/alb"
+
+  name               = "${local.inputs.servers.cdr.name}-alb"
+  internal           = false
+  security_groups    = [module.cdr_alb_sg.security_group_id]
+  subnets           = local.inputs.servers.cdr.elb_subnets
+  vpc_id            = local.inputs.vpc_id
+
+  enable_cross_zone_load_balancing = false
+  idle_timeout                     = 1800
+  enable_http2                     = true
+  enable_access_logs               = false
+  
+  default_ssl_policy     = "ELBSecurityPolicy-2016-08"
+  default_certificate_arn = local.inputs.alb_certificate_arn
+
+  target_groups = [
+    {
+      name        = "${local.inputs.servers.cdr.name}-tg"
+      port        = 443
+      protocol    = "HTTPS"
+      target_type = "instance"
+      health_check = {
+        enabled             = true
+        protocol            = "HTTPS"
+        path                = "/api/v1/health_checks"
+        healthy_threshold   = 3
+        unhealthy_threshold = 3
+        timeout             = 5
+        interval            = 30
+        matcher             = "200"
+      }
+    }
+  ]
+
+  listeners = [
+    {
+      port            = 443
+      protocol        = "HTTPS"
+      ssl_policy      = "ELBSecurityPolicy-2016-08"
+      certificate_arn = local.inputs.alb_certificate_arn
+      default_action = {
+        type             = "forward"
+        target_group_key = 0
+        redirect         = null
+      }
+    }
+  ]
+
+  tags = local.inputs.tags
+}
+
 # Application Load Balancer for SAS
 module "sas_alb" {
   source = "./modules/alb"
@@ -114,7 +127,7 @@ module "sas_alb" {
         unhealthy_threshold = 3
         timeout             = 5
         interval            = 30
-        matcher             = "200-399"
+        matcher             = "200"
       }
     }
   ]
@@ -183,7 +196,7 @@ module "guac_alb" {
         unhealthy_threshold = 3
         timeout             = 5
         interval            = 30
-        matcher             = "200-399"
+        matcher             = "200"
       }
     }
   ]

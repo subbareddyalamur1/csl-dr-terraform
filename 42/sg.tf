@@ -16,7 +16,7 @@ module "cdr_sg" {
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-      cidr_blocks = [local.vpc_cidr]
+      cidr_blocks = ["0.0.0.0/0"]
     }
   ]
 
@@ -46,7 +46,7 @@ module "sftp_sg" {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
-      cidr_blocks = [local.vpc_cidr]
+      cidr_blocks = ["0.0.0.0/0"]
     }
   ]
 
@@ -76,7 +76,7 @@ module "sas_sg" {
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-      security_groups = [module.sas_alb_sg.security_group_id]
+      security_groups = ["0.0.0.0/0"]
     }
   ]
 
@@ -172,6 +172,35 @@ module "guac_alb_sg" {
       description = "HTTP from anywhere"
       from_port   = 80
       to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
+
+  egress_rules = [
+    {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  ]
+
+  tags = local.inputs.tags
+}
+
+module "cdr_alb_sg" {
+  source = "./modules/security_group"
+
+  name        = "${local.inputs.servers.cdr.name}-alb-sg"
+  description = "Security group for CDR ALB"
+  vpc_id      = local.inputs.vpc_id
+
+  ingress_rules = [
+    {
+      description = "HTTPS from anywhere"
+      from_port   = 443
+      to_port     = 443
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }

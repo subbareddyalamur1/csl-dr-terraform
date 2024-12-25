@@ -8,7 +8,7 @@ DOMAIN="sycamoreinformatics.de"
 # Load Balancer DNS names from Terraform output
 SAS_ALB_DNS=$(terraform output -raw sas_alb_dns)
 GUAC_ALB_DNS=$(terraform output -raw guac_alb_dns)
-CDR_NLB_DNS=$(terraform output -raw cdr_nlb_dns)
+CDR_ALB_DNS=$(terraform output -raw cdr_alb_dns)
 SFTP_NLB_DNS=$(terraform output -raw sftp_nlb_dns)
 
 SFTP_NAME="sftp-csl-val-dr"
@@ -69,8 +69,8 @@ else
 fi
 
 # Add CNAME for CDR NLB
-if [ -n "$CDR_NLB_DNS" ]; then
-    add_cname_record "$CDR_NAME" "$CDR_NLB_DNS"
+if [ -n "$CDR_ALB_DNS" ]; then
+    add_cname_record "$CDR_NAME" "$CDR_ALB_DNS"
 else
     echo "Error: CDR NLB DNS name not found in Terraform output"
     exit 1

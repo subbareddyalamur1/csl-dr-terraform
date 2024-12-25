@@ -8,9 +8,9 @@ output "guac_alb_dns" {
   value       = module.guac_alb.lb_dns_name
 }
 
-output "cdr_nlb_dns" {
-  description = "DNS name of the CDR Network Load Balancer"
-  value       = module.cdr_nlb.lb_dns_name
+output "cdr_alb_dns" {
+  description = "DNS name of the CDR Application Load Balancer"
+  value       = module.cdr_alb.lb_dns_name
 }
 
 output "sftp_nlb_dns" {
