@@ -76,7 +76,7 @@ module "sas_sg" {
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-      security_groups = ["0.0.0.0/0"]
+      cidr_blocks = ["0.0.0.0/0"]
     }
   ]
 
@@ -106,7 +106,7 @@ module "guac_sg" {
       from_port   = 443
       to_port     = 443
       protocol    = "tcp"
-      security_groups = [module.guac_alb_sg.security_group_id]
+      cidr_blocks = ["0.0.0.0/0"]
     }
   ]
 

@@ -23,19 +23,19 @@
 #   tags = merge(local.inputs.tags, { Name = "${local.inputs.servers.cdr.name}" } )
 # }
 
-resource "aws_instance" "sftp" {
-  associate_public_ip_address = true
-  ami = local.inputs.servers.sftp.ami_id
-  instance_type = local.inputs.servers.sftp.instance_type
-  availability_zone = local.inputs.servers.sftp.availability_zone
-  private_ip = local.inputs.servers.sftp.private_ip
-  subnet_id = local.inputs.servers.sftp.subnet_id
-  key_name = local.inputs.servers.sftp.key_pair
-  iam_instance_profile = local.inputs.servers.sftp.instance_profile
-  vpc_security_group_ids = [local.inputs.default_sg_id] 
+# resource "aws_instance" "sftp" {
+#   associate_public_ip_address = true
+#   ami = local.inputs.servers.sftp.ami_id
+#   instance_type = local.inputs.servers.sftp.instance_type
+#   availability_zone = local.inputs.servers.sftp.availability_zone
+#   private_ip = local.inputs.servers.sftp.private_ip
+#   subnet_id = local.inputs.servers.sftp.subnet_id
+#   key_name = local.inputs.servers.sftp.key_pair
+#   iam_instance_profile = local.inputs.servers.sftp.instance_profile
+#   vpc_security_group_ids = [local.inputs.default_sg_id] 
   
-  tags = merge(local.inputs.tags, { Name = "${local.inputs.servers.sftp.name}" } )
-}
+#   tags = merge(local.inputs.tags, { Name = "${local.inputs.servers.sftp.name}" } )
+# }
 
 # resource "aws_instance" "sas" {
 #   associate_public_ip_address = true

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # GoDaddy API Configuration
-API_KEY="xxx"
-API_SECRET="xxx"
+API_KEY="A4vUC1vkQ8Q_DY7Y5fq42mqASnT3qHhDfL"
+API_SECRET="DY7nUFrRSnKFZYAC3JvLxe"
 DOMAIN="sycamoreinformatics.de"
 
 # Load Balancer DNS names from Terraform output
@@ -11,10 +11,10 @@ GUAC_ALB_DNS=$(terraform output -raw guac_alb_dns)
 CDR_ALB_DNS=$(terraform output -raw cdr_alb_dns)
 SFTP_NLB_DNS=$(terraform output -raw sftp_nlb_dns)
 
-SFTP_NAME="sftp-csl-val-dr"
-CDR_NAME="cdr-csl-val-dr"
-SAS_NAME="sas-csl-val-dr"
-GUAC_NAME="wde-csl-val-dr"
+SFTP_NAME="sftp-csl-production-dr"
+CDR_NAME="cdr-csl-production-dr"
+SAS_NAME="sas-csl-production-dr"
+GUAC_NAME="wde-csl-prod-dr"
 
 # Function to add/update CNAME record
 add_cname_record() {
@@ -86,3 +86,4 @@ fi
 
 
 echo "DNS records added successfully!"
+

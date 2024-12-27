@@ -1,0 +1,99 @@
+
+tf_state_bucket_name: csl-dr-tf-state
+tf_state_path: DR/csl/prod42/terraform.tfstate
+
+tags: {
+  "Application": "CDR-SCE",
+  "Environment": "CSL-PROD-DR",
+  "Customer": "CSL Behring",
+  "ProjectCode": "CSL-SCE-42-PROD-DR",
+}
+
+aws_region: "eu-central-1"
+vpc_id: vpc-0791a49aca9148e4d # VPC-CSL-PROD-DR
+vpc_cidr_block: "10.0.0.0/16"
+default_sg_id: "sg-08875387c69b77ad1"
+alb_certificate_arn: "arn:aws:acm:eu-central-1:826859497240:certificate/910603e4-0207-457e-b793-4f658ebf85e6"
+
+servers:
+  ad:
+    name: AD-PRD-CSL-SCE-3x-2022-DR
+    ami_id: ami-0e6b331f8424a858c # ytu
+    key_pair: csl-sshkey-prod
+    instance_type: m5.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.7.252"
+    subnet_id: subnet-008d88653f0e74f2b # Core-Subnet-1b
+    instance_profile: "Custom-ec2-role"
+  ad2:
+    name: AD-PRD-CSL-SCE-3x-DR
+    ami_id: ami-0e6b331f8424a858c # ytu
+    key_pair: csl-sshkey-prod
+    instance_type: m4.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.83"
+    public_ip: "18.159.41.115"
+    subnet_id: subnet-05936f5cf7d177afd # public-Subnet-b
+    instance_profile: "Custom-ec2-role"
+  cdr:
+    name: CDR-PRD-CSL-SCE-4x-DR
+    ami_id: ami-03ba1674b6f2be948  # ytu
+    key_pair: SSHKEY-SCE-csl-cslbehring-prod
+    instance_type: m6i.8xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.7.175"
+    subnet_id: subnet-008d88653f0e74f2b # Core-Subnet-1b
+    elb_subnets:
+      - subnet-0fa473760f6dc6c50 # Public-Subnet-1a
+      - subnet-05936f5cf7d177afd # Public-subnet-b
+    instance_profile: "SCE-4.2.2.1-csl-cslbehring-prod-FSA-SRVR-role"
+    ports:
+      - 443
+      - 25
+  sftp:
+    name: sFTP-PRD-CSL-SCE-4x-DR
+    ami_id: ami-0360e01e53dff5df7  # ytu
+    key_pair: SSHKEY-SCE-csl-cslbehring-prod
+    instance_type: m5.xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.9.191"
+    subnet_id: subnet-062326950b319219a # DMZ-Subnet-1b
+    elb_subnets:
+      - subnet-0fa473760f6dc6c50 # Public-Subnet-1a
+      - subnet-05936f5cf7d177afd # Public-subnet-b
+    instance_profile: "SCE-4.2.2.1-csl-cslbehring-prod-sFTP-SRVR-role"
+    ports:
+      - 22
+      - 25
+  sas:
+    name: SAS-PRD-CSL-SCE-4x-DR
+    ami_id: ami-03af32dd15f101cd6  # ytu
+    key_pair: SSHKEY-SCE-csl-cslbehring-prod
+    instance_type: i3.8xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.7.68"
+    subnet_id: subnet-008d88653f0e74f2b # Core-Subnet-1b
+    elb_subnets:
+      - subnet-0fa473760f6dc6c50 # Public-Subnet-1a
+      - subnet-05936f5cf7d177afd # Public-subnet-b
+    instance_profile: "SCE-4.2.2.1-csl-cslbehring-prod-SAS-SRVR-role"
+    ports:
+      - 443
+  guac:
+    name: GUAC-PROD-CSL-SCE-4x-DR
+    ami_id: ami-0e6b331f8424a858c  # ytu
+    key_pair: SSHKEY-SCE-csl-cslbehring-prod
+    instance_type: c5.4xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.7.117"
+    subnet_id: subnet-062326950b319219a # DMZ-Subnet-1b
+    elb_subnets:
+      - subnet-0fa473760f6dc6c50 # Public-Subnet-1a
+      - subnet-05936f5cf7d177afd # Public-subnet-b
+    instance_profile: "SCE-4.2.2.7a-csl-cslbehring-prod-guacamole_server-SRVR-role"
+    ports:
+      - 443
+      - 80
+
+  
+

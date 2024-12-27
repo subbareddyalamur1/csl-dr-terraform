@@ -1,0 +1,66 @@
+
+tf_state_bucket_name: csl-dr-tf-state
+tf_state_path: DR/csl/prod35/terraform.tfstate
+
+tags: {
+  "Application": "CDR-SCE",
+  "Environment": "CSL-PROD-DR",
+  "Customer": "CSL Behring",
+  "ProjectCode": "CSL-SCE-35-PROD-DR",
+}
+
+aws_region: "eu-central-1"
+vpc_id: vpc-0791a49aca9148e4d # VPC-CSL-PROD-DR
+vpc_cidr_block: "10.0.0.0/16"
+default_sg_id: "sg-08875387c69b77ad1"
+
+servers:
+  ad:
+    name: AD-PRD-CSL-SCE-3x-2022-DR
+    ami_id: ami-0e6b331f8424a858c # ytu
+    key_pair: csl-sshkey-prod
+    instance_type: m5.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.7.252"
+    subnet_id: subnet-008d88653f0e74f2b # Core-Subnet-1b
+    instance_profile: "Custom-ec2-role"
+  ad2:
+    name: AD-PRD-CSL-SCE-3x-DR
+    ami_id: ami-0e6b331f8424a858c # ytu
+    key_pair: csl-sshkey-prod
+    instance_type: m4.large
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.83"
+    public_ip: "18.159.41.115"
+    subnet_id: subnet-05936f5cf7d177afd # public-Subnet-b
+    instance_profile: "Custom-ec2-role"
+  cdr:
+    name: CDR-PRD-CSL-SCE-3x-DR
+    ami_id: ami-0fefdce1745a0c7d5 # ytu
+    key_pair: csl-sshkey-prod
+    instance_type: m4.10xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.50"
+    public_ip: "3.121.67.21"
+    subnet_id: subnet-05936f5cf7d177afd # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sftp:
+    name: sFTP-PRD-CSL-SCE-3x-DR
+    ami_id: ami-077fd2542dda2beff  # ytu
+    key_pair: csl-sshkey-prod
+    instance_type: m4.xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.103"
+    public_ip: "52.29.75.80"
+    subnet_id: subnet-05936f5cf7d177afd # Public-subnet-b
+    instance_profile: "Custom-ec2-role"
+  sas:
+    name: SAS-PRD-CSL-SCE-3x-DR
+    ami_id: ami-08b1de820223a8349  # ytu
+    key_pair: sycamore-sshkey-prod
+    instance_type: i3en.2xlarge
+    availability_zone: "eu-central-1b"
+    private_ip: "10.0.0.161"
+    public_ip: "35.156.246.252"
+    subnet_id: subnet-05936f5cf7d177afd # Public-Subnet-1b
+    instance_profile: "Custom-ec2-role"
