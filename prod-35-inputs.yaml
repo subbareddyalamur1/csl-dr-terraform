@@ -17,7 +17,7 @@ default_sg_id: "sg-08875387c69b77ad1"
 servers:
   ad:
     name: AD-PRD-CSL-SCE-3x-2022-DR
-    ami_id: ami-0e6b331f8424a858c # ytu
+    ami_id: ami-022c558168bbc9d02 # 2024/12/28 06:02
     key_pair: csl-sshkey-prod
     instance_type: m5.large
     availability_zone: "eu-central-1b"
@@ -26,7 +26,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   ad2:
     name: AD-PRD-CSL-SCE-3x-DR
-    ami_id: ami-0e6b331f8424a858c # ytu
+    ami_id: ami-05233a7cbb18d5a42 # 2024/12/28 14:22
     key_pair: csl-sshkey-prod
     instance_type: m4.large
     availability_zone: "eu-central-1b"
@@ -36,7 +36,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   cdr:
     name: CDR-PRD-CSL-SCE-3x-DR
-    ami_id: ami-0fefdce1745a0c7d5 # ytu
+    ami_id: ami-09a1d1e0250e2dc3e # 2024/12/28 06:02
     key_pair: csl-sshkey-prod
     instance_type: m4.10xlarge
     availability_zone: "eu-central-1b"
@@ -46,7 +46,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   sftp:
     name: sFTP-PRD-CSL-SCE-3x-DR
-    ami_id: ami-077fd2542dda2beff  # ytu
+    ami_id: ami-09fc4a4f872428358  # 2024/12/28 06:03
     key_pair: csl-sshkey-prod
     instance_type: m4.xlarge
     availability_zone: "eu-central-1b"
@@ -56,7 +56,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   sas:
     name: SAS-PRD-CSL-SCE-3x-DR
-    ami_id: ami-08b1de820223a8349  # ytu
+    ami_id: ami-089e1afc23c021799  # 2024/12/28 06:03
     key_pair: sycamore-sshkey-prod
     instance_type: i3en.2xlarge
     availability_zone: "eu-central-1b"
