@@ -18,7 +18,7 @@ alb_certificate_arn: "arn:aws:acm:eu-central-1:826859497240:certificate/910603e4
 servers:
   ad:
     name: AD-PRD-CSL-SCE-3x-2022-DR
-    ami_id: ami-0e6b331f8424a858c # ytu
+    ami_id: ami-02843d3b13b4da890 # 2024/12/29 14:30 
     key_pair: csl-sshkey-prod
     instance_type: m5.large
     availability_zone: "eu-central-1b"
@@ -27,7 +27,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   ad2:
     name: AD-PRD-CSL-SCE-3x-DR
-    ami_id: ami-0e6b331f8424a858c # ytu
+    ami_id: ami-0f6531b2cc97c9746 # 2024/12/29 14:30 
     key_pair: csl-sshkey-prod
     instance_type: m4.large
     availability_zone: "eu-central-1b"
@@ -37,7 +37,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   cdr:
     name: CDR-PRD-CSL-SCE-4x-DR
-    ami_id: ami-03ba1674b6f2be948  # ytu
+    ami_id: ami-0d2725bf06f310613  # 2024/12/29 14:31
     key_pair: SSHKEY-SCE-csl-cslbehring-prod
     instance_type: m6i.8xlarge
     availability_zone: "eu-central-1b"
@@ -52,7 +52,7 @@ servers:
       - 25
   sftp:
     name: sFTP-PRD-CSL-SCE-4x-DR
-    ami_id: ami-0360e01e53dff5df7  # ytu
+    ami_id: ami-011692aeee9f151a1  # 2024/12/29 14:49
     key_pair: SSHKEY-SCE-csl-cslbehring-prod
     instance_type: m5.xlarge
     availability_zone: "eu-central-1b"
@@ -67,7 +67,7 @@ servers:
       - 25
   sas:
     name: SAS-PRD-CSL-SCE-4x-DR
-    ami_id: ami-03af32dd15f101cd6  # ytu
+    ami_id: ami-0440fe585234a7d88  # 2024/12/29 14:49
     key_pair: SSHKEY-SCE-csl-cslbehring-prod
     instance_type: i3.8xlarge
     availability_zone: "eu-central-1b"
@@ -81,7 +81,7 @@ servers:
       - 443
   guac:
     name: GUAC-PROD-CSL-SCE-4x-DR
-    ami_id: ami-0e6b331f8424a858c  # ytu
+    ami_id: ami-0446409a5851f58fa  # 2024/12/29 14:50 
     key_pair: SSHKEY-SCE-csl-cslbehring-prod
     instance_type: c5.4xlarge
     availability_zone: "eu-central-1b"

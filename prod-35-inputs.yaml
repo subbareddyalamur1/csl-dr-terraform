@@ -17,7 +17,7 @@ default_sg_id: "sg-08875387c69b77ad1"
 servers:
   ad:
     name: AD-PRD-CSL-SCE-3x-2022-DR
-    ami_id: ami-022c558168bbc9d02 # 2024/12/28 06:02
+    ami_id: ami-05233a7cbb18d5a42 # 2024/12/28 14:22
     key_pair: csl-sshkey-prod
     instance_type: m5.large
     availability_zone: "eu-central-1b"
@@ -26,7 +26,7 @@ servers:
     instance_profile: "Custom-ec2-role"
   ad2:
     name: AD-PRD-CSL-SCE-3x-DR
-    ami_id: ami-05233a7cbb18d5a42 # 2024/12/28 14:22
+    ami_id: ami-022c558168bbc9d02 # 2024/12/28 06:02
     key_pair: csl-sshkey-prod
     instance_type: m4.large
     availability_zone: "eu-central-1b"
