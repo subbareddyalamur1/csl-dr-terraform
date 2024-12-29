@@ -86,7 +86,7 @@ servers:
     instance_type: c5.4xlarge
     availability_zone: "eu-central-1b"
     private_ip: "10.0.7.117"
-    subnet_id: subnet-062326950b319219a # DMZ-Subnet-1b
+    subnet_id: subnet-008d88653f0e74f2b # Core-Subnet-1b
     elb_subnets:
       - subnet-0fa473760f6dc6c50 # Public-Subnet-1a
       - subnet-05936f5cf7d177afd # Public-subnet-b
